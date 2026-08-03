@@ -15,7 +15,6 @@ class Diorequest {
       ..sendTimeout = Duration(seconds: GlobalConstants.TIME_OUT);
     // 拦截器
 
-
   }
 
   // 添加拦截器
@@ -33,11 +32,34 @@ class Diorequest {
         handler.reject(DioException(requestOptions: response.requestOptions));
       },
       onError: (error, handler) {
-        
+        handler.next(error);
       },
     ));
   }
 
+  Future<dynamic> get (String url, {Map<String,dynamic>? parms}) {
+    return _handleResponse(_dio.get(url, queryParameters: parms));
+  }
+
+  // 进一步处理返回结果的函数
+  Future<dynamic> _handleResponse(Future<Response<dynamic>> task) async {
+    try {
+      Response res = await task;
+      final data = res.data as Map<String,dynamic>;
+      // print("1234567");
+      // print(data);
+      if (data["code"] == GlobalConstants.SUCCESS_CODE) {
+        // print("finish");
+        print(data["result"]);
+        return data["result"];
+      }
+      // print("error");
+      // 抛出异常
+      throw Exception(data["mas"] ?? "加载数据异常");
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
 }
 
 final diorequest = Diorequest();
