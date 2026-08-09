@@ -65,7 +65,7 @@ class _MainPageState extends State<MainPage> {
   List<BottomNavigationBarItem> _getTabBarWidget() {
     return List.generate(_tableList.length, (int index) {
       return BottomNavigationBarItem(
-        icon: Image.asset(_tableList[index]["icon"]!),
+        icon: Image.asset(_tableList[index]["icon"]!,height: 40, width: 40,),
         activeIcon: Image.asset(_tableList[index]["icon"]!, height: 30, width: 30,),
         label: _tableList[index]["text"]
       );

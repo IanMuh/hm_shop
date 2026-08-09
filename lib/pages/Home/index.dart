@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hm_shop/api/home.dart';
+import 'package:hm_shop/components/home/HmCategory.dart';
+import 'package:hm_shop/components/home/HmHot.dart';
+import 'package:hm_shop/components/home/HmMoreList.dart';
+import 'package:hm_shop/components/home/HmSlider.dart';
+import 'package:hm_shop/components/home/HmSuggestion.dart';
 import 'package:hm_shop/constants/index.dart';
 import 'package:hm_shop/utils/DioRequest.dart';
 import 'package:hm_shop/viewmodels/home.dart';
@@ -16,43 +21,49 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   List<Banneritem> _bannerList = [];
 
+  // 获取滚动容器的内容
   List<Widget> _getScrollChildren() {
     return [
-      SliverAppBar(
-        title: Text('图片横向播放示例'),
-        pinned: true,
-      ),
-      SliverToBoxAdapter(
-        child: SizedBox(
-          height: 200, // 必须指定固定高度
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal, // 关键：设置为水平滚动
-            itemCount: _bannerList.length, // 图片张数
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    _bannerList[index].imgUrl,
-                    width: 300, // 每张图的宽度
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    ];
+      // 轮播图
+      SliverToBoxAdapter(child: HmSlider()),
 
-    // return List.generate(_bannerList.length, (index) {
-    //   return Image.network(
-    //     _bannerList[index].imgUrl,
-    //     height: 100,
-    //     width: 100,
-    //   );
-    // });
+      // 分类组件，不可以使用 sliverList,sliver
+      SliverToBoxAdapter(child: SizedBox(height: 10,),),
+
+      SliverToBoxAdapter(child: HmCategory(),),
+
+      // 推荐组件
+      SliverToBoxAdapter(child: SizedBox(height: 10,),),
+
+      SliverToBoxAdapter(child: 
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: HmSuggestion(),
+        )
+      ),
+
+      // 爆款组件
+      SliverToBoxAdapter(child: SizedBox(height: 10,),),
+      
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Flex(
+            direction: Axis.horizontal,
+            children: [
+              Expanded(child: HmHot()),
+              SizedBox(width: 10,),
+              Expanded(child: HmHot()),
+            ],
+            ),
+          )
+      ),
+
+      SliverToBoxAdapter(child: SizedBox(height: 10,),),
+
+      HmMoreList()
+
+    ];
   }
 
   void _getBannerList() async {
@@ -62,7 +73,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getBannerList();
   }
