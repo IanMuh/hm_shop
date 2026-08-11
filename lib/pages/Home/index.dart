@@ -25,9 +25,9 @@ class _HomeViewState extends State<HomeView> {
   List<Widget> _getScrollChildren() {
     return [
       // 轮播图
-      SliverToBoxAdapter(child: HmSlider()),
+      SliverToBoxAdapter(child: HmSlider(bannerList: _bannerList,)),
 
-      // 分类组件，不可以使用 sliverList,sliver
+      // 分类组件，不可以使用 sliverList,sliverGride，因为它们只能纵向排列
       SliverToBoxAdapter(child: SizedBox(height: 10,),),
 
       SliverToBoxAdapter(child: HmCategory(),),
