@@ -5,8 +5,6 @@ import 'package:hm_shop/components/home/HmHot.dart';
 import 'package:hm_shop/components/home/HmMoreList.dart';
 import 'package:hm_shop/components/home/HmSlider.dart';
 import 'package:hm_shop/components/home/HmSuggestion.dart';
-import 'package:hm_shop/constants/index.dart';
-import 'package:hm_shop/utils/DioRequest.dart';
 import 'package:hm_shop/viewmodels/home.dart';
 
 class HomeView extends StatefulWidget {
@@ -17,8 +15,8 @@ class HomeView extends StatefulWidget {
 }
 
 
-
 class _HomeViewState extends State<HomeView> {
+  List<CategoryItem> _categoryList = []; // 分类列表
   List<Banneritem> _bannerList = [];
 
   // 获取滚动容器的内容
@@ -30,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
       // 分类组件，不可以使用 sliverList,sliverGride，因为它们只能纵向排列
       SliverToBoxAdapter(child: SizedBox(height: 10,),),
 
-      SliverToBoxAdapter(child: HmCategory(),),
+      SliverToBoxAdapter(child: HmCategory(categoryList: _categoryList)), // 分类组件
 
       // 推荐组件
       SliverToBoxAdapter(child: SizedBox(height: 10,),),
@@ -71,10 +69,16 @@ class _HomeViewState extends State<HomeView> {
     setState(() {});
   }
 
+  void _getCategoryList() async {
+    _categoryList = await getCategoryItem();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _getBannerList();
+    _getCategoryList();
   }
 
   @override

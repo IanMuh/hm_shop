@@ -11,3 +11,9 @@ Future<List<Banneritem>> getBannerListAPI() async {
       return Banneritem.fromJson(item as Map<String,dynamic>);
   }).toList();
 }
+
+Future<List<CategoryItem>> getCategoryItem() async {
+  return (await diorequest.get(HttpConstants.CATEGORY_LIST) as List)
+      .map((item) => CategoryItem.fromJson(item as Map<String, dynamic>))
+      .toList();
+}
