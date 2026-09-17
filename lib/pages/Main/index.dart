@@ -16,23 +16,23 @@ class _MainPageState extends State<MainPage> {
 
   final List<Map<String,String>> _tableList = [
     {
-      "icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
-      "active_icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
+      "icon": "lib/assets/ic_public_home_normal.png",
+      "active_icon": "lib/assets/ic_public_home_active.png",
       "text": "首页",
     },
     {
-      "icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
-      "active_icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
+      "icon": "lib/assets/ic_public_pro_normal.png",
+      "active_icon": "lib/assets/ic_public_pro_active.png",
       "text": "分类",
     },
     {
-      "icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
-      "active_icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
+      "icon": "lib/assets/ic_public_cart_normal.png",
+      "active_icon": "lib/assets/ic_public_cart_active.png",
       "text": "购物车",
     },
     {
-      "icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
-      "active_icon": "lib/assets/codex-2026-07-21T12-59-58-270Z.png",
+      "icon": "lib/assets/ic_public_my_normal.png",
+      "active_icon": "lib/assets/ic_public_my_active.png",
       "text": "我的",
     },
   ];
@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
     return List.generate(_tableList.length, (int index) {
       return BottomNavigationBarItem(
         icon: Image.asset(_tableList[index]["icon"]!,height: 40, width: 40,),
-        activeIcon: Image.asset(_tableList[index]["icon"]!, height: 30, width: 30,),
+        activeIcon: Image.asset(_tableList[index]["active_icon"]!, height: 30, width: 30,),
         label: _tableList[index]["text"]
       );
     });

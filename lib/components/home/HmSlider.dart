@@ -26,7 +26,7 @@ class _HmSliderState extends State<HmSlider> {
     }), options: CarouselOptions(
       viewportFraction: 1.0,
       autoPlay: true,
-      autoPlayInterval: Duration(seconds: 1), // 切换间隔时间
+      autoPlayInterval: Duration(seconds: 10), // 切换间隔时间
     ));
   }
 
