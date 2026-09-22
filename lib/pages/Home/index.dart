@@ -16,11 +16,25 @@ class HomeView extends StatefulWidget {
 
 
 class _HomeViewState extends State<HomeView> {
+  // 特惠推荐
   SpecialRecommendedResult _specialRecommendedResult = SpecialRecommendedResult(
     id: "",
     subTypes: [],
     title: "",
   );
+  // 爆款推荐
+  SpecialRecommendedResult _inVogueResult = SpecialRecommendedResult(
+    id: "",
+    subTypes: [],
+    title: "",
+  );
+  // 一站式推荐
+  SpecialRecommendedResult _oneStopResult = SpecialRecommendedResult(
+    id: "",
+    subTypes: [],
+    title: "",
+  );
+
   List<CategoryItem> _categoryList = []; // 分类列表
   List<Banneritem> _bannerList = [];
 
@@ -54,9 +68,9 @@ class _HomeViewState extends State<HomeView> {
           child: Flex(
             direction: Axis.horizontal,
             children: [
-              Expanded(child: HmHot()),
+              Expanded(child: HmHot(result: _inVogueResult, type: "hot",)),
               SizedBox(width: 10,),
-              Expanded(child: HmHot()),
+              Expanded(child: HmHot(result: _oneStopResult, type: "step",)),
             ],
             ),
           )
@@ -84,12 +98,24 @@ class _HomeViewState extends State<HomeView> {
     setState(() {});
   }
 
+  void _getInVoguetList() async {
+    _inVogueResult = await getInVogueListAPI();
+    setState(() {});
+  }
+
+  void _getOneStopList() async {
+    _oneStopResult = await getOneStopListAPI();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _getBannerList();
     _getCategoryList();
     _getProductList();
+    _getInVoguetList();
+    _getOneStopList();
   }
 
   @override

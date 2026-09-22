@@ -24,3 +24,18 @@ Future<SpecialRecommendedResult> getProductListAPI() async {
     await diorequest.get(HttpConstants.PRODUCT_LIST)
   );
 }
+
+// 热榜推荐
+
+Future<SpecialRecommendedResult> getInVogueListAPI() async {
+  return SpecialRecommendedResult.fromJson(
+    await diorequest.get(HttpConstants.IN_VOGUE_LIST)
+  );
+}
+
+// 一站式推荐
+Future<SpecialRecommendedResult> getOneStopListAPI() async {
+  return SpecialRecommendedResult.fromJson(
+    await diorequest.get(HttpConstants.ONE_STOP_LIST)
+  );
+}
