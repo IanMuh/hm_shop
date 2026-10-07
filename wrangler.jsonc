@@ -1,0 +1,8 @@
+{
+  "name": "hm-shop",
+  "compatibility_date": "2026-10-07",
+  "assets": {
+    "directory": "./build/web",
+    "not_found_handling": "single-page-application"
+  }
+}
